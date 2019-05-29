@@ -1,3 +1,5 @@
+import processing.serial.*;
+
 PFont f;
 PImage scull;
 int boot=0;
@@ -5,6 +7,8 @@ int time=0;
 int programmingPart=0; //0-introduction; 1-binary_taks
 String input="";
 int correct=0;
+Serial arduinoPort;
+
 
 void setup() {
   //fullScreen();
@@ -13,9 +17,15 @@ void setup() {
   frameRate(60);
   f = createFont("Courier New",16,true);
   scull = loadImage("scull.png");
+  
+  
+  arduinoPort = new Serial(this, Serial.list()[0], 9600);
+  thread("readPort");
+  
 }
 
 void draw() {
+  
   background(0);
   if(boot<=200){
     background(0);
@@ -140,6 +150,7 @@ void draw() {
     
   }
   boot++;
+  
 }
 
 void keyPressed(){
@@ -157,4 +168,24 @@ void keyPressed(){
         input="";
       }else if(keyCode!=SHIFT && keyCode!=CONTROL && keyCode!=ALT) input+=key;
   }
+}
+
+
+void readPort(){
+  
+  
+  
+  System.out.println("Work");
+  while(true){
+    while(arduinoPort.available() > 0){
+      String res = arduinoPort.readString();
+      System.out.print(res);
+    }
+    delay(1000);
+    System.out.println("Work done");
+  }
+    
+  
+ 
+  
 }
