@@ -7,7 +7,6 @@ int time=0;
 int programmingPart=0; //0-introduction; 1-binary_taks
 String input="";
 int correct=0;
-Serial arduinoPort;
 
 
 void setup() {
@@ -19,8 +18,6 @@ void setup() {
   scull = loadImage("scull.png");
   
   
-  arduinoPort = new Serial(this, Serial.list()[0], 9600);
-  thread("readPort");
   
 }
 
@@ -171,21 +168,8 @@ void keyPressed(){
 }
 
 
-void readPort(){
-  
-  
-  
-  System.out.println("Work");
-  while(true){
-    while(arduinoPort.available() > 0){
-      String res = arduinoPort.readString();
-      System.out.print(res);
-    }
-    delay(1000);
-    System.out.println("Work done");
-  }
+
     
   
  
   
-}
