@@ -1,14 +1,14 @@
 PFont f;
 PImage scull;
-int boot=0;
+int boot=0; 
 int time=0;
 int programmingPart=0; //0-introduction; 1-binary_taks
 String input="";
 int correct=0;
 
 void setup() {
-  //fullScreen();
-  size(1280,720); //1280
+  fullScreen();
+  //size(1280,720); //1280
   noCursor();
   frameRate(60);
   f = createFont("Courier New",16,true);
@@ -155,6 +155,6 @@ void keyPressed(){
       if(input.equals("§") || (correct==0 && input.equals("ADE0011.GHE0001.1011DA")) || (correct==1 && input.equals("ET1001L.0010CTH.0111DZX")) || (correct==2 && input.equals("H1000KG.HT0100Z.0100XXC")))
         correct++;
         input="";
-      }else if(keyCode!=SHIFT && keyCode!=CONTROL && keyCode!=ALT) input+=key;
+      }else if(keyCode!=SHIFT && keyCode!=CONTROL && keyCode!=ALT && keyCode!=20 && keyCode!=9) input+=key;
   }
 }
