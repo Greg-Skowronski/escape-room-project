@@ -19,10 +19,6 @@ public class BinaryRiddle extends GameLevel {
   {
     
   }
-  public void onKeyPress(int keyCode)
-  {
-    
-  }
   void display() {
     
     fill(0,255,0);

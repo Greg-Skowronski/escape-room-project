@@ -36,7 +36,7 @@ void draw() {
 }
 
 void keyPressed() {
-  /*
+  
   if(booting.end()==true){
     if (key == BACKSPACE && input != null && input.length() > 0) {
       input = input.substring(0, input.length() - 1);
@@ -46,6 +46,5 @@ void keyPressed() {
       input="";
     }else if(keyCode!=SHIFT && keyCode!=CONTROL && keyCode!=ALT && keyCode!=20 && keyCode!=9) input+=key;
   }
-  */
   
 }

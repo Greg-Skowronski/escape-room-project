@@ -21,10 +21,6 @@ public class BootScreen extends GameLevel {
   {
     
   }
-  public void onKeyPress(int keyCode)
-  {
-    
-  }
   void display() {
     
     background(0);
