@@ -22,6 +22,9 @@ public class BinaryRiddle extends GameLevel {
   public void onKeyPress(int keycode)
   {
   }
+  public void onMouseClick(){}
+  
+  
   void display() {
     
     fill(0,255,0);

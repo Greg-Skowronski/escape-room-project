@@ -1,9 +1,32 @@
-public class LOGIN_FORM{
+public class LOGIN_FORM extends GameLevel{
 
     ArrayList<TEXTBOX> textboxes = new ArrayList<TEXTBOX>();
     boolean logged = false; // DEMO
     
-    public LOGIN_FORM() {
+    public void updateLevel(){
+    
+    }
+    public void loadLevel(){
+      
+    }
+    
+    public void unloadLevel(){
+  
+    }
+    
+     public void onEvent(GameEvent event){
+     
+     }
+     public void onKeyPress(int keycode){
+      
+     }
+     public void onMouseClick(){
+       
+     }
+    
+    public LOGIN_FORM(EventListener levelController) {
+      
+      super(levelController);
       
      // USERNAME TEXTBOX
      TEXTBOX userTB = new TEXTBOX(width/2 , height/2-100);

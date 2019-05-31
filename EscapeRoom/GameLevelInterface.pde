@@ -1,6 +1,8 @@
 public interface EventListener {
   public void onEvent(GameEvent event);
   public void onKeyPress(int keycode);
+  public void onMouseClick();
+  
 }
 public abstract class GameLevel implements EventListener {
   public GameLevel(EventListener levelController)

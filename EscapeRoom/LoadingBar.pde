@@ -17,6 +17,8 @@ public class LoadingScreen extends GameLevel  {
   {
     
   }
+  public void onMouseClick(){}
+  
   void display() {
     
     if(time<=200) 

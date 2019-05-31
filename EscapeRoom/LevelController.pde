@@ -1,6 +1,5 @@
-
-
 public class LevelController implements EventListener {
+  
   int levelCount = 3;
   Class[] levelClasses = {LoadingScreen.class, BootScreen.class, BinaryRiddle.class};  
   private int currentGameLevelID = 0;
@@ -13,6 +12,10 @@ public class LevelController implements EventListener {
       currentLevel.onKeyPress(keycode);
     }
   }
+  
+  public void onMouseClick(){
+  }
+  
   public LevelController(EscapeRoom er)
   {
     this.er = er;
