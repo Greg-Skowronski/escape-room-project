@@ -1,7 +1,9 @@
 public class LoginForm extends GameLevel{
 
-    ArrayList<TEXTBOX> textboxes = new ArrayList<TEXTBOX>();
-    boolean logged = false; // DEMO
+    private ArrayList<TEXTBOX> textboxes = new ArrayList<TEXTBOX>();
+    private boolean logged = false; // DEMO
+    private Matrix matrix;
+    
     
      public void updateLevel()
      {
@@ -41,6 +43,8 @@ public class LoginForm extends GameLevel{
       
       super(levelController);
       
+      frameRate(120);      
+      
      // USERNAME TEXTBOX
      TEXTBOX userTB = new TEXTBOX(width/2 , height/2-100);
      
@@ -49,12 +53,16 @@ public class LoginForm extends GameLevel{
      
      textboxes.add(userTB);
      textboxes.add(passTB);
+     
+     matrix = new Matrix();
     }
 
 
     public void display(){
     
        background(0);
+       matrix.display();
+       
        fill(0,255,0);
        
        // LABELS
