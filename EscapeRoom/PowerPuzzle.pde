@@ -3,6 +3,7 @@ public class PowerPuzzle extends GameLevel {
   { 
     super(levelController);
   }  
+  PFont font;
   public void updateLevel()
   {
     
@@ -11,7 +12,8 @@ public class PowerPuzzle extends GameLevel {
   {
     background(0);
     fill(0,255,0);
-    textFont(f);
+    font = createFont("Courier New",16,true);
+    textFont(font);
     text("Routing complete. Automatically rebuilding look-up tables.",50,200);
     text("Cannot parse IP address [6/94]. Automatic reencoding failure.",50,220);
     text("Binary Coded Decimal lookup tables corruption detected [84% instability].",50,240);

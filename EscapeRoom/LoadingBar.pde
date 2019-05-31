@@ -3,11 +3,12 @@ public class LoadingScreen extends GameLevel  {
   { 
     super(levelController);
   }
-  int time = 0;
+  int loadingTime = 0;
+  PFont font;
   public void updateLevel()
   {
     display();
-     time++;
+    loadingTime++;
   }
   public void loadLevel() 
   {
@@ -20,27 +21,22 @@ public class LoadingScreen extends GameLevel  {
   public void onMouseClick(){}
   
   void display() {
-    
-    if(time<=200) 
-    {
+    font = createFont("Courier New",16,true);
+    textFont(font);
+    if(loadingTime<=200) {
       background(0);
-      fill(0,255,0);
-      textFont(f);
+      fill(0,170,80);
       textAlign(CENTER);
       text("loading...",width/2,height/2-30);
-      rect(width/2-200,height/2-20,time*2,40);
+      rect(width/2-200,height/2-20,loadingTime*2,40);
     }
     else
       raiseEvent(new GameEvent(EventSource.PC,EventType.LEVEL_COMPLETE,null));
     
   }
-  
-  boolean end() {
-    if(time>200) return true;
-    else return false;
-  }  
   public void unloadLevel()
   {
+    
   }
   public void onEvent(GameEvent event)
   {

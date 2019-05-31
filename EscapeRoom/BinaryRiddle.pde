@@ -3,8 +3,9 @@ public class BinaryRiddle extends GameLevel {
   { 
     super(levelController);
   }
-  int time = 1500;
-  int correct = 0;
+  int timeRemain = 1500;
+  int answeredQuestions = 0;
+  PFont font;
   public void loadLevel()
   {
   }
@@ -14,6 +15,8 @@ public class BinaryRiddle extends GameLevel {
   public void updateLevel()
   {
     display();
+    timeRemain--;
+    if(timeRemain==0) timeRemain=1500;
   }
   public void onEvent(GameEvent event)
   {
@@ -21,85 +24,93 @@ public class BinaryRiddle extends GameLevel {
   }
   public void onKeyPress(int keycode)
   {
+    if(keycode==ENTER) answeredQuestions++;
   }
   public void onMouseClick(){}
   
   
   void display() {
-    
-    fill(0,255,0);
+    background(0);
+    font = createFont("Courier New",16,true);
+    textFont(font);
+    fill(0,170,80);
     textAlign(RIGHT);
-    text(time,width-50,100);
+    text(timeRemain,width-50,100);
     textAlign(CENTER);
     text("<c> 2019 SciRun Corporation.",width/2,100);
     textAlign(LEFT);
     text(day()+"-"+month()+"-"+year(),50,100);
     
-    if(time%1500==0) {
-      correct=0;
+    if(timeRemain%1500==0) 
+    {
+      answeredQuestions=0;
       input="";
     }
     text("ERROR: Intranet failure. Cannot establish connection with mainframe unit.",50,200);
     text("Cannot parse IP address [6/94]. Automatic reencoding failure.",50,220);
     text("Binary Coded Decimal lookup tables corruption detected [84% instability].",50,240);
     text("Manual encoding required. Refer to the Operations Manual, pages 219-221.",50,260);
-    text("Use ENTER to confirm or BACKSPACE to delete. Arrow keys will move between entries. ",50,280);
+    text("Use ENTER to confirm or BACKSPACE to delete.",50,280);
     text("Corrupt entries have been marked with [####].",50,300);
-    //text("and you will need to start once again. Good luck and be careful!",50,320);
+    text("You have 120 seconds to correct the data or your progress will be lost.",50,320);
     
-    switch(correct){
-      case 0:{
-          fill(255,0,0);
-          text("ADE3.GHE1.11DA",50,400);
-          text("C:/",50,420);
-          text("ET9L.2CTH.7DZX",50,500);
-          text("H8KG.HT4Z.4XXC",50,600);
-          break;
-        }
-        case 1:{
-          fill(0,255,0);
-          text("ADE3.GHE1.11DA",50,400);
-          text("C:/ >>ADE0011.GHE0001.1011DA",50,420);
-          fill(255,0,0);
-          text("ET9L.2CTH.7DZX",50,500);
-          text("C:/",50,520);
-          text("H8KG.HT4Z.4XXC",50,600);
-          break;
-        }
-        case 2:{
-          fill(0,255,0);
-          text("ADE3.GHE1.11DA",50,400);
-          text("C:/ >>ADE0011.GHE0001.1011DA",50,420);
-          text("ET9L.2CTH.7DZX",50,500);
-          text("C:/ >>ET1001L.0010CTH.0111DZX",50,520);
-          fill(255,0,0);
-          text("H8KG.HT4Z.4XXC",50,600);
-          text("C:/",50,620);
-          break;
-        }
-        case 3:{
-          background(0);
-          break;
-        }
+    switch(answeredQuestions)
+    {
+      case 0:
+      {
+        fill(255,0,70);
+        text("192.0.2.1",50,400);
+        text("000110010010.0000.[####].0001",50,420);
+        text("172.16.254.1",50,500);
+        text("000101110010.0001[####].0010[####]0100.0001",50,520);
+        text("144.36.255.0",50,600);
+        text("[####]01000100.[####]0110.00100101[####].0000",50,620);
+        
+        break;
       }
-      text(input,80,420+correct*100);
+      case 1:
+      {
+        fill(0,170,80);
+        text("192.0.2.1",50,400);
+        text("000110010010.0000.[####].0001",50,420);
+        fill(255,0,70);
+        text("172.16.254.1",50,500);
+        text("000101110010.0001[####].0010[####]0100.0001",50,520);
+        text("144.36.255.0",50,600);
+        text("[####]01000100.[####]0110.00100101[####].0000",50,620);
+        break;
+      }
+      case 2:
+      {
+        fill(0,170,80);
+        text("192.0.2.1",50,400);
+        text("000110010010.0000.[####].0001",50,420);
+        text("172.16.254.1",50,500);
+        text("000101110010.0001[####].0010[####]0100.0001",50,520);
+        fill(255,0,70);
+        text("144.36.255.0",50,600);
+        text("[####]01000100.[####]0110.00100101[####].0000",50,620);
+        break;
+      }
+      case 3:
+      {
+        background(255,0,0);
+        break;
+      }
+    }
+    text(input,80,420+answeredQuestions*100);
   }
   
   boolean end() {
-    if(correct==3) return true;
+    if(answeredQuestions==3) return true;
     return false;
   }
   
-  void update() {
-    time--;
-    if(time==0) time=1500;
+  int getAnsweredQuestions() {
+    return answeredQuestions;
   }
   
-  int getCorrect() {
-    return correct;
-  }
-  
-  void setCorrect(int number) {
-    this.correct = number;
+  void setAnsweredQuestions(int number) {
+    this.answeredQuestions = number;
   }
 }
