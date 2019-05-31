@@ -8,7 +8,7 @@ public class TEXTBOX {
    
    // COLORS
    private final color Background = color(140, 140, 140);
-   private final color Foreground = color(0, 0, 0);
+   private final color Foreground = color(255, 255, 255);
    private final color BackgroundSelected = color(160, 160, 160);
    private final color Border = color(255, 255, 255);
    
@@ -46,7 +46,8 @@ public class TEXTBOX {
       // DRAWING THE TEXT ITSELF
       fill(Foreground);
       textSize(TEXTSIZE);
-      text(Text, X + (textWidth("a") / 2), Y + TEXTSIZE);
+      //text(Text, X + (textWidth("a") / 2), Y + TEXTSIZE);
+      text(Text, X/2, Y + TEXTSIZE);
    }
    
    // IF THE KEYCODE IS ENTER RETURN 1
