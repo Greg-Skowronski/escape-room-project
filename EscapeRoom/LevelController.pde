@@ -1,5 +1,3 @@
-
-
 public class LevelController implements EventListener {
   int levelCount = 3;
   Class[] levelClasses = {LoadingScreen.class, BootScreen.class, BinaryRiddle.class};  
@@ -49,7 +47,7 @@ public class LevelController implements EventListener {
       Debugger.debug(currentLevel.toString());
       currentLevel.loadLevel();
     }
-    catch( Exception ex)
+    catch(Exception ex)
     {
       Debugger.error("Cannot create GameLevel object in LevelController. Undefined behaviour and crashing might occur.\n"
       + ex.toString());
