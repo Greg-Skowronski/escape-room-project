@@ -3,26 +3,38 @@ public class LoginForm extends GameLevel{
     ArrayList<TEXTBOX> textboxes = new ArrayList<TEXTBOX>();
     boolean logged = false; // DEMO
     
-    public void updateLevel(){
+     public void updateLevel()
+     {
+      
+         display();
+     }
+     public void loadLevel()
+     {
+       
+     }
+      
+     public void unloadLevel()
+     {
     
-       display();
-    }
-    public void loadLevel(){
-     
-    }
+     }
     
-    public void unloadLevel(){
-  
-    }
-    
-     public void onEvent(GameEvent event){
+     public void onEvent(GameEvent event)
+     {
      
      }
-     public void onKeyPress(int keycode){
-      
+     public void onKeyPress(int keycode)
+     {
+         for (TEXTBOX t : textboxes) {
+          if (t.KEYPRESSED(key, (int)keyCode)) {
+             Submit();
+          }
+       }
      }
      public void onMouseClick(){
        
+       for (TEXTBOX t : textboxes) {
+          t.PRESSED(mouseX, mouseY);
+       }
      }
     
     public LoginForm(EventListener levelController) {
