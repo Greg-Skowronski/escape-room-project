@@ -44,6 +44,7 @@ public class TEXTBOX {
       rect(X, Y, W, H);
       
       // DRAWING THE TEXT ITSELF
+      textFont(textFont);
       fill(Foreground);
       textSize(TEXTSIZE);
       text(Text, X + (textWidth("a") / 2), Y + TEXTSIZE);

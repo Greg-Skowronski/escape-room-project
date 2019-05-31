@@ -79,7 +79,7 @@ public class LoginForm extends GameLevel{
        
        fill(255,255,255);
        textSize(45);
-       text("Press Enter to Login", (width - textWidth("Press Enter to Login")) / 2, 120);
+       text("Press Enter to Login", (width - textWidth("Press ENTER to log in")) / 2, 120);
     }
     
     // JUST FOR DEMO

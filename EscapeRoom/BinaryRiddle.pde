@@ -116,8 +116,8 @@ public class BinaryRiddle extends GameLevel {
     
     if(timeRemain%40==0) cursorColor=0;
     else if(timeRemain%20==0) cursorColor=1;
-    if(cursorColor==1) fill(0,255,0);
-    else fill(0);
+    if(cursorColor==1) { fill(0,170,80); stroke(0); }
+    else { fill(0); stroke(0,170,80); }
     
     switch(selectedQuestion) {
       case 1: {
@@ -129,7 +129,7 @@ public class BinaryRiddle extends GameLevel {
         break;
       }
       case 3: {
-        rect(321,508,50,14);
+        rect(322,508,50,14);
         break;
       }
       case 4: {
@@ -137,7 +137,7 @@ public class BinaryRiddle extends GameLevel {
         break;
       }
       case 5: {
-        rect(196,608,50,14);
+        rect(197,608,50,14);
         break;
       }
       case 6: {
