@@ -6,6 +6,9 @@ public class BinaryRiddle extends GameLevel {
   int timeRemain = 1500;
   int answeredQuestions = 0;
   PFont font;
+  String[] correctAnswers = {"0010","0110","0101","0001","0011","0101"};
+  int selectedQuestion = 2;
+  int cursorColor = 1;
   public void loadLevel()
   {
   }
@@ -25,6 +28,16 @@ public class BinaryRiddle extends GameLevel {
   public void onKeyPress(int keycode)
   {
     if(keycode==ENTER) answeredQuestions++;
+    if(keycode==DOWN) 
+    {
+      if(selectedQuestion==6) selectedQuestion=1;
+      else selectedQuestion++;
+    }
+    if(keycode==UP) 
+    {
+      if(selectedQuestion==1) selectedQuestion=6;
+      else selectedQuestion--;
+    }
   }
   void display() {
     background(0);
@@ -55,6 +68,7 @@ public class BinaryRiddle extends GameLevel {
     {
       case 0:
       {
+        
         fill(255,0,70);
         text("192.0.2.1",50,400);
         text("000110010010.0000.[####].0001",50,420);
@@ -96,6 +110,39 @@ public class BinaryRiddle extends GameLevel {
       }
     }
     text(input,80,420+answeredQuestions*100);
+    
+    if(timeRemain%40==0) cursorColor=0;
+    else if(timeRemain%20==0) cursorColor=1;
+    if(cursorColor==1) fill(0,255,0);
+    else fill(0);
+    
+    switch(selectedQuestion) {
+      case 1: {
+        rect(226,408,50,14);
+        break;
+      }
+      case 2: {
+        rect(216,508,50,14);
+        break;
+      }
+      case 3: {
+        rect(321,508,50,14);
+        break;
+      }
+      case 4: {
+        rect(53,608,50,14);
+        break;
+      }
+      case 5: {
+        rect(196,608,50,14);
+        break;
+      }
+      case 6: {
+        rect(380,608,50,14);
+        break;
+      }
+    }
+    
   }
   
   boolean end() {
