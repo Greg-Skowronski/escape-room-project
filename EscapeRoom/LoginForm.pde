@@ -3,7 +3,7 @@ public class LoginForm extends GameLevel{
     private ArrayList<TEXTBOX> textboxes = new ArrayList<TEXTBOX>();
     private boolean logged = false; // DEMO
     private Matrix matrix;
-    
+    private PFont theFont;
     
      public void updateLevel()
      {
@@ -44,6 +44,8 @@ public class LoginForm extends GameLevel{
       super(levelController);
       
       frameRate(120);      
+      theFont = createFont("Courier New",60,true);
+      
       
      // USERNAME TEXTBOX
      TEXTBOX userTB = new TEXTBOX(width/2 , height/2-100);
@@ -63,12 +65,12 @@ public class LoginForm extends GameLevel{
        background(0);
        matrix.display();
        
-       fill(0,255,0);
-       
        // LABELS
-       fill(0, 255, 0);
-       textSize(30);
-       text("LOGIN FORM", (width - textWidth("LOGIN FORM")) / 2, 60);
+       fill(255, 255, 255);
+       textSize(60);
+       textFont(theFont);
+       //text("LOGIN FORM", (width - textWidth("LOGIN FORM")) / 2, 60);
+       text("LOGIN FORM" , width/2 , 60);
        
        
        text("Username: ", width/4, height/2 - 70);
@@ -82,12 +84,14 @@ public class LoginForm extends GameLevel{
        // JUST FOR DEMO (DO NOT EVER DO THAT!)
        if (logged) {
           fill(250, 250, 250);
-          text("YOU ARE LOGGED IN!", (width - textWidth("YOU ARE LOGGED IN")) / 2, 230);
+          //text("YOU ARE LOGGED IN!", (width - textWidth("YOU ARE LOGGED IN")) / 2, 230);
+          text("YOU ARE LOGGED IN!", width/2, 230);
        }
        
        fill(255,255,255);
        textSize(45);
-       text("Press Enter to Login", (width - textWidth("Press Enter to Login")) / 2, 120);
+       //text("Press Enter to Login", (width - textWidth("Press Enter to Login")) / 2, 120);
+       text("Press Enter to Login", width/ 2, 120);
     }
     
     // JUST FOR DEMO

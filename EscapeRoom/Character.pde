@@ -26,6 +26,7 @@ class Character{
   }
   
   public void show(){
+    textSize(CHAR_SIZE);
     text(theChar, x , y);
   }
   

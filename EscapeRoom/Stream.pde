@@ -19,11 +19,6 @@ public class Stream{
       chars.add(new Character(tempX,y));
     }
     
-    //for(int y = beginningY; y < numChar * Character.CHAR_SIZE; y+=Character.CHAR_SIZE){
-    
-      
-    //}
-    
     speed = round(random(2,4));
   }
   
