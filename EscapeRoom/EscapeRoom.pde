@@ -1,4 +1,3 @@
-String input="";
 LevelController levelsController;
 import java.lang.reflect.*;
 

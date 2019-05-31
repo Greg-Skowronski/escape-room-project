@@ -13,7 +13,7 @@ public class TEXTBOX {
    private final color Border = color(255, 255, 255);
    
    private boolean BorderEnable = true;
-   private final int BorderWeight = 3;
+   private final int BorderWeight = 1; //3;
    
    public String Text = "";
    public int TextLength = 0;
@@ -44,6 +44,7 @@ public class TEXTBOX {
       rect(X, Y, W, H);
       
       // DRAWING THE TEXT ITSELF
+      textFont(textFont);
       fill(Foreground);
       textSize(TEXTSIZE);
       //text(Text, X + (textWidth("a") / 2), Y + TEXTSIZE);

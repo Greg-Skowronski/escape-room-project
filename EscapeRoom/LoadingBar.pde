@@ -21,6 +21,8 @@ public class LoadingScreen extends GameLevel  {
   public void onMouseClick(){}
   
   void display() {
+    noStroke();
+    strokeWeight(1);
     font = createFont("Courier New",16,true);
     textFont(font);
     if(loadingTime<=200) {
