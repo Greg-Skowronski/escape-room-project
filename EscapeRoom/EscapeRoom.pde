@@ -1,10 +1,9 @@
-String input="";
 LevelController levelsController;
 import java.lang.reflect.*;
 
 void setup() {
-  fullScreen();
-  //size(1280,720); //1280
+  //fullScreen();
+  size(1280,720); //1280
 
   frameRate(60);
   levelsController = new LevelController(this);
