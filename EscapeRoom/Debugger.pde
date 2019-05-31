@@ -9,6 +9,7 @@ public static class Debugger
   }
   public static void error(String msg)
   {
+    
     println(TAG_ERROR + msg);
   }
   public static void debug(String msg)
