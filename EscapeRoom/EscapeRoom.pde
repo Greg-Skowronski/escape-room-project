@@ -24,3 +24,8 @@ void keyPressed() {
   levelsController.onKeyPress(keyCode);
   
 }
+
+void mousePressed(){
+
+  levelsController.onMouseClick();
+}
