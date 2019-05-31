@@ -1,10 +1,8 @@
 PFont f;
 PImage scull;
 String input="";
-LoadingScreen loading; 
-BootScreen booting;
-BinaryRiddle riddle01;
-
+LevelController levelsController;
+import java.lang.reflect.*;
 void setup() {
   //fullScreen();
   size(1280,720); //1280
@@ -12,26 +10,13 @@ void setup() {
   frameRate(60);
   f = createFont("Courier New",16,true);
   scull = loadImage("scull.png");
+  levelsController = new LevelController(this);
+  levelsController.loadLevel(0);
 }
 
 void draw() {
   
-  background(0);
-  
-  if(loading.end()==false){
-    loading.display();
-    loading.updateLevel();
-  }
-  
-  if(loading.end()==true && booting.end()==false){
-    booting.display();
-    booting.update();
-  }
-  
-  if(booting.end()==true && riddle01.end()==false){
-    riddle01.display();
-    riddle01.update();
-  }
+  levelsController.update();
 
 }
 

@@ -2,6 +2,7 @@ public class BootScreen extends GameLevel {
   public BootScreen(EventListener levelController) 
   { 
     super(levelController);
+    Debugger.debug("BootScreen created.");
   }
   int time = 0;
   boolean end = false;
@@ -15,6 +16,7 @@ public class BootScreen extends GameLevel {
   }
   public void updateLevel()
   {
+    time++;
     display();
   }
   public void onEvent(GameEvent event)
@@ -95,10 +97,6 @@ public class BootScreen extends GameLevel {
       if(key==ENTER && time>800) end=true;
     }
     return end;
-  }
-  
-  void update() {
-    time++;
   }
   
 }

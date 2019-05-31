@@ -1,16 +1,29 @@
+
+
 public class LevelController implements EventListener {
   int levelCount = 3;
   Class[] levelClasses = {LoadingScreen.class, BootScreen.class, BinaryRiddle.class};  
   private int currentGameLevelID = 0;
   private GameLevel currentLevel;
+  private EscapeRoom er;
+  public LevelController(EscapeRoom er)
+  {
+    this.er = er;
+  }
   public void update()
   {
     if(currentLevel!=null)
+    {
       currentLevel.updateLevel();
+    }
+    else
+    {
+      Debugger.debug("currentLevel is null");
+    }
   }
   public void loadNextLevel()
   {
-   loadLevel(currentGameLevelID++);
+   loadLevel(currentGameLevelID+1);
   }
   public void loadLevel(int levelID)
   {
@@ -24,16 +37,23 @@ public class LevelController implements EventListener {
     currentGameLevelID = levelID;
     try 
     {
-      currentLevel = (GameLevel)levelClasses[levelID].getConstructor().newInstance();
+      Constructor<?> constructor = levelClasses[levelID].getConstructor(EscapeRoom.class, EventListener.class);
+      currentLevel = (GameLevel)constructor.newInstance(er,this);
+      Debugger.debug(currentLevel.toString());
       currentLevel.loadLevel();
     }
     catch( Exception ex)
     {
-      Debugger.error("Cannot create GameLevel object in LevelController. Undefined behaviour and crashing might occur.");
+      Debugger.error("Cannot create GameLevel object in LevelController. Undefined behaviour and crashing might occur.\n"
+      + ex.toString());
+      
     }
   }
   public void onEvent(GameEvent event)
   {
-    
+    if(event.eventType == EventType.LEVEL_COMPLETE)
+    {
+      loadNextLevel();
+    }
   }
 }

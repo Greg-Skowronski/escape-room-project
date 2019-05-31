@@ -26,7 +26,13 @@ enum EventType {
   
 }
 public class GameEvent {
-  //private EventSource eventSource;
-  //private EventType eventType;
+  public GameEvent(EventSource source, EventType type, Object args)
+  {
+    this.eventSource = source;
+    this.eventType = type;
+    this.args = args;
+  }
+  private EventSource eventSource;
+  private EventType eventType;
   Object args;
 }
