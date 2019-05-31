@@ -6,6 +6,13 @@ public class LevelController implements EventListener {
   private int currentGameLevelID = 0;
   private GameLevel currentLevel;
   private EscapeRoom er;
+  public void onKeyPress(int keycode)
+  {
+    if(currentLevel!=null)
+    {
+      currentLevel.onKeyPress(keycode);
+    }
+  }
   public LevelController(EscapeRoom er)
   {
     this.er = er;

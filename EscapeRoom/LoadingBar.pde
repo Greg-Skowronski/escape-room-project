@@ -13,7 +13,7 @@ public class LoadingScreen extends GameLevel  {
   {
     
   }
-  public void onKeyPress(int keyCode)
+  public void onKeyPress(int keycode)
   {
     
   }

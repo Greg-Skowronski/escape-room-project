@@ -1,5 +1,6 @@
 public interface EventListener {
   public void onEvent(GameEvent event);
+  public void onKeyPress(int keycode);
 }
 public abstract class GameLevel implements EventListener {
   public GameLevel(EventListener levelController)
@@ -10,7 +11,6 @@ public abstract class GameLevel implements EventListener {
   public abstract void updateLevel();
   public abstract void loadLevel();
   public abstract void unloadLevel();
-  public abstract void onKeyPress(int keyCode);
   public void raiseEvent(GameEvent event)
   {
     levelController.onEvent(event);
