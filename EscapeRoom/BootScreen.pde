@@ -30,6 +30,7 @@ public class BootScreen extends GameLevel {
   {
     if(keycode==ENTER) raiseEvent(new GameEvent(EventSource.PC,EventType.LEVEL_COMPLETE,null));
   }
+  public void onMouseClick(){}
   void display() {
     
     font = createFont("Courier New",16,true);

@@ -18,6 +18,8 @@ public class LoadingScreen extends GameLevel  {
   {
     
   }
+  public void onMouseClick(){}
+  
   void display() {
     font = createFont("Courier New",16,true);
     textFont(font);

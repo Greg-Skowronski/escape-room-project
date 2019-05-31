@@ -39,6 +39,9 @@ public class BinaryRiddle extends GameLevel {
       else selectedQuestion--;
     }
   }
+  public void onMouseClick(){}
+  
+  
   void display() {
     background(0);
     font = createFont("Courier New",16,true);

@@ -25,6 +25,10 @@ public class PowerPuzzle extends GameLevel {
   {
     
   }
+  public void onMouseClick()
+  {
+  
+  }
   public void unloadLevel()
   {
     
