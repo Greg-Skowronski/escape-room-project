@@ -1,13 +1,14 @@
-public class LOGIN_FORM extends GameLevel{
+public class LoginForm extends GameLevel{
 
     ArrayList<TEXTBOX> textboxes = new ArrayList<TEXTBOX>();
     boolean logged = false; // DEMO
     
     public void updateLevel(){
     
+       display();
     }
     public void loadLevel(){
-      
+     
     }
     
     public void unloadLevel(){
@@ -24,7 +25,7 @@ public class LOGIN_FORM extends GameLevel{
        
      }
     
-    public LOGIN_FORM(EventListener levelController) {
+    public LoginForm(EventListener levelController) {
       
       super(levelController);
       
@@ -39,7 +40,7 @@ public class LOGIN_FORM extends GameLevel{
     }
 
 
-    public void draw(){
+    public void display(){
     
        background(0);
        fill(0,255,0);
