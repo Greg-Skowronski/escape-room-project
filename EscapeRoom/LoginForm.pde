@@ -82,18 +82,12 @@ public class LoginForm extends GameLevel{
        text("Press Enter to Login", (width - textWidth("Press Enter to Login")) / 2, 120);
     }
     
-    
-    public void mousePressed() {
-       for (TEXTBOX t : textboxes) {
-          t.PRESSED(mouseX, mouseY);
-       }
-    }
-
     // JUST FOR DEMO
     public void Submit() {
        if (textboxes.get(0).Text.equals("BADF00D")) {
           if (textboxes.get(1).Text.equals("1234")) {
              logged = true;
+             raiseEvent(new GameEvent(EventSource.PC,EventType.LEVEL_COMPLETE,null));
           } else {
              logged = false;
           }
@@ -101,12 +95,5 @@ public class LoginForm extends GameLevel{
           logged = false;
        }
     }
-
-    public void keyPressed() {
-       for (TEXTBOX t : textboxes) {
-          if (t.KEYPRESSED(key, (int)keyCode)) {
-             Submit();
-          }
-       }
-    }
+    
 }
