@@ -2,6 +2,8 @@ public class LoadingScreen extends GameLevel  {
   public LoadingScreen(EventListener levelController) 
   { 
     super(levelController);
+    
+    frameRate(60);
   }
   int loadingTime = 0;
   PFont font;

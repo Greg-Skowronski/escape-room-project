@@ -61,8 +61,6 @@ public class TEXTBOX {
         text(Text, X, Y);
       }
       
-      
-      //text(Text, X + (textWidth(Text) / 2), Y);
    }
    
    // IF THE KEYCODE IS ENTER RETURN 1
@@ -109,8 +107,8 @@ public class TEXTBOX {
          Text = Text.substring(0, TextLength - 1);
          TextLength--;
          if(ID == password){
-          hiddenPassword += "*";
-        }
+          hiddenPassword = hiddenPassword.substring(0, TextLength - 1);
+         }
       }
    }
    
