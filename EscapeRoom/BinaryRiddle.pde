@@ -37,7 +37,7 @@ public class BinaryRiddle extends GameLevel {
       input="";
     }
     text("ERROR: Intranet failure. Cannot establish connection with mainframe unit.",50,200);
-    text("Cannot parse IP address [6/94]. Automatic reencoding failure.",50,220);
+    text("Cannot parse IP address [4]. Automatic reencoding failure.",50,220);
     text("Binary Coded Decimal lookup tables corruption detected [84% instability].",50,240);
     text("Manual encoding required. Refer to the Operations Manual, pages 219-221.",50,260);
     text("Use ENTER to confirm or BACKSPACE to delete. Arrow keys will move between entries. ",50,280);

@@ -3,7 +3,9 @@ PImage scull;
 String input="";
 LevelController levelsController;
 import java.lang.reflect.*;
+public static TextRenderer textRenderer;
 void setup() {
+  textRenderer = new TextRenderer();
   //fullScreen();
   size(1280,720); //1280
   noCursor();
@@ -11,7 +13,7 @@ void setup() {
   f = createFont("Courier New",16,true);
   scull = loadImage("scull.png");
   levelsController = new LevelController(this);
-  levelsController.loadLevel(0);
+  levelsController.loadLevel(3);
 }
 
 void draw() {

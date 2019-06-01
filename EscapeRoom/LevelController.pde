@@ -1,8 +1,8 @@
 
 
 public class LevelController implements EventListener {
-  int levelCount = 3;
-  Class[] levelClasses = {LoadingScreen.class, BootScreen.class, BinaryRiddle.class};  
+  int levelCount = 4;
+  Class[] levelClasses = {LoadingScreen.class, BootScreen.class, BinaryRiddle.class, PowerPuzzle.class};  
   private int currentGameLevelID = 0;
   private GameLevel currentLevel;
   private EscapeRoom er;
