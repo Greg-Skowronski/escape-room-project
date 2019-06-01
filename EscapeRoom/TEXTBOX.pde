@@ -1,15 +1,20 @@
 public class TEXTBOX {
    
    PFont textFont;
+    //private final int ID;
+   public static final int password = 1;
+   public static final int username = 0;
+   private final int ID;
+   private String hiddenPassword = "";
   
-   private final int H = 80, W = 220;
+   private final int H = 65, W = 300;
    private final int X, Y;
    private final int TEXTSIZE = 60;
    
    // COLORS
-   private final color Background = color(140, 140, 140);
+   private final color Background = color(0,0,0);
    private final color Foreground = color(255, 255, 255);
-   private final color BackgroundSelected = color(160, 160, 160);
+   private final color BackgroundSelected = color(45,45,45);
    private final color Border = color(255, 255, 255);
    
    private boolean BorderEnable = true;
@@ -20,9 +25,10 @@ public class TEXTBOX {
 
    private boolean selected = false;
    
-   TEXTBOX(int x, int y){
+   TEXTBOX(int x, int y, int id){
      this.X = x;
      this.Y = y;
+     this.ID = id;
      textFont = createFont("Courier New", 45 ,true);
    }
    
@@ -47,8 +53,16 @@ public class TEXTBOX {
       textFont(textFont);
       fill(Foreground);
       textSize(TEXTSIZE);
-      //text(Text, X + (textWidth("a") / 2), Y + TEXTSIZE);
-      text(Text, X/2, Y + TEXTSIZE);
+      textAlign(LEFT, TOP);
+      
+      if(ID == password){
+        text(hiddenPassword, X, Y);
+      }else{
+        text(Text, X, Y);
+      }
+      
+      
+      //text(Text, X + (textWidth(Text) / 2), Y);
    }
    
    // IF THE KEYCODE IS ENTER RETURN 1
@@ -79,16 +93,24 @@ public class TEXTBOX {
    
    private void addText(char text) {
       // IF THE TEXT WIDHT IS IN BOUNDARIES OF THE TEXTBOX
-      if (textWidth(Text + text) < W) {
-         Text += text;
-         TextLength++;
+      final int maxTextLength = 9; // for this length all the characters are inside the box, must be changed if the width changes
+      if( (TextLength+1) < maxTextLength){
+        Text += text;
+        if(ID == password){
+          hiddenPassword += "*";
+        }
+        TextLength++;
       }
+      
    }
    
    private void BACKSPACE() {
       if (TextLength - 1 >= 0) {
          Text = Text.substring(0, TextLength - 1);
          TextLength--;
+         if(ID == password){
+          hiddenPassword += "*";
+        }
       }
    }
    
