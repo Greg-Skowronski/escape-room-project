@@ -3,7 +3,7 @@ public class Starfield{
   private Star[] stars;
   
   public Starfield(){
-    stars = new Star[400];
+    stars = new Star[1200];
     
     for(int i = 0; i < stars.length; i++){
       stars[i] = new Star();

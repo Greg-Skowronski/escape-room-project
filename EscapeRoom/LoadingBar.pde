@@ -1,6 +1,8 @@
 public class LoadingScreen extends GameLevel  {
   
   private int loadingTime = 0;
+  private final int maxLoadTime = 400;
+  
   private PFont font;
   private Starfield starfield;
   
@@ -29,6 +31,11 @@ public class LoadingScreen extends GameLevel  {
   
   void display() {
     
+    if(loadingTime > maxLoadTime){
+      raiseEvent(new GameEvent(EventSource.PC,EventType.LEVEL_COMPLETE,null));
+    }
+    
+    
     background(0);
     starfield.display();
     
@@ -36,18 +43,15 @@ public class LoadingScreen extends GameLevel  {
     strokeWeight(1);
     font = createFont("Courier New",16,true);
     textFont(font);
-    if(loadingTime<=200) {
-      fill(0,0,0);
-      rect(width/2-200,height/2-20,420,60);
-      
-      fill(0,170,80);
-      textAlign(CENTER);
-      text("loading...",width/2,height/2-30);
-      rect(width/2-200,height/2-20,loadingTime*2,40);
-    }
-    else
-      raiseEvent(new GameEvent(EventSource.PC,EventType.LEVEL_COMPLETE,null));
     
+    fill(0,0,0);
+    rect(width/2-200,height/2-20,420,60);
+      
+    fill(0,170,80);
+    textAlign(CENTER);
+    text("loading...",width/2,height/2-30);
+    rect(width/2-200,height/2-20,loadingTime,40);
+  
   }
   public void unloadLevel()
   {
