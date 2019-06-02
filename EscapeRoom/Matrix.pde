@@ -19,6 +19,8 @@ public class Matrix{
     for(Stream s: streams){
       s.update();
     }
+    
+    
   }
   
 }

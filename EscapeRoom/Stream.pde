@@ -11,15 +11,15 @@ public class Stream{
     numChar = (int)round(random(10,30));
     
     int beginningY = height/Character.CHAR_SIZE;
-    beginningY = round(random(0, beginningY));
-    println(beginningY);
+    beginningY = round(random(0, beginningY))* Character.CHAR_SIZE;
+    
     
     for(int i = 0, y = beginningY; i < numChar; i++, y+= Character.CHAR_SIZE){
       
       chars.add(new Character(tempX,y));
     }
     
-    speed = round(random(2,4));
+    speed = round(random(2,10));
   }
   
   void update(){
