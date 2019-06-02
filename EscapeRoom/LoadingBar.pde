@@ -46,8 +46,9 @@ public class LoadingScreen extends GameLevel  {
     
     fill(0,0,0);
     rect(width/2-200,height/2-20,420,60);
-      
-    fill(0,170,80);
+    
+    fill(255);
+    //fill(0,170,80);
     textAlign(CENTER);
     text("loading...",width/2,height/2-30);
     rect(width/2-200,height/2-20,loadingTime,40);
