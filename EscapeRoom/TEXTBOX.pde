@@ -103,12 +103,14 @@ public class TEXTBOX {
    }
    
    private void BACKSPACE() {
+     
       if (TextLength - 1 >= 0) {
          Text = Text.substring(0, TextLength - 1);
-         TextLength--;
+         println(Text);
          if(ID == password){
           hiddenPassword = hiddenPassword.substring(0, TextLength - 1);
          }
+         TextLength--;
       }
    }
    

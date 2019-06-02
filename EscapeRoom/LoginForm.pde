@@ -11,7 +11,7 @@ public class LoginForm extends GameLevel{
     
     private void displayWrongData(){
     
-       String errorMessage = "Incorrect data. Access denied !";
+       String errorMessage = "Incorrect data. Access denied!";
        textAlign(TOP, CENTER);
        text(errorMessage, (width - textWidth(errorMessage)) / 2, height - 200);
     }
