@@ -5,9 +5,20 @@ public class LoginForm extends GameLevel{
     private Matrix matrix;
     private PFont theFont;
     
+    private float delayTime = frameRate/2;
+    private float frameCounter = 0;
+    private boolean errorMessage = false;
+    
+    private void displayWrongData(){
+    
+       String errorMessage = "Incorrect data. Access denied !";
+       textAlign(TOP, CENTER);
+       text(errorMessage, (width - textWidth(errorMessage)) / 2, height - 200);
+    }
+    
+    
      public void updateLevel()
      {
-      
          display();
      }
      public void loadLevel()
@@ -87,7 +98,16 @@ public class LoginForm extends GameLevel{
        fill(255,255,255);
        textSize(45);
        text("Press Enter to Login", (width - textWidth("Press Enter to Login")) / 2, 120);
-       //text("Press Enter to Login", width/ 2, 120);
+       
+       
+       if(errorMessage == true){
+         displayWrongData();
+         frameCounter++;
+         if(frameCounter > delayTime){
+           errorMessage = false;
+           frameCounter = 0;
+         }
+       }
     }
     
     // JUST FOR DEMO
@@ -98,9 +118,14 @@ public class LoginForm extends GameLevel{
              raiseEvent(new GameEvent(EventSource.PC,EventType.LEVEL_COMPLETE,null));
           } else {
              logged = false;
+             errorMessage = true;
+             frameCounter = 0;
           }
        } else {
           logged = false;
+          errorMessage = true;
+          println(frameRate);
+          frameCounter = 0;
        }
     }
     
