@@ -11,7 +11,6 @@ public class Stream{
     numChar = (int)round(random(10,30));
     
     int beginningY = height/Character.CHAR_SIZE;
-    println(beginningY);
     beginningY = round(random(0, beginningY))* Character.CHAR_SIZE;
     
     
