@@ -1,7 +1,6 @@
 public class TEXTBOX {
    
    PFont textFont;
-    //private final int ID;
    public static final int password = 1;
    public static final int username = 0;
    private final int ID;
