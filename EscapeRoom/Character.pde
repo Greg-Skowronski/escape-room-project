@@ -26,7 +26,6 @@ class Character{
   }
   
   public void show(){
-    textAlign(CENTER, TOP);
     textSize(CHAR_SIZE);
     text(theChar, x , y);
   }
