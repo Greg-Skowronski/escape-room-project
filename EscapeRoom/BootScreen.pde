@@ -89,11 +89,10 @@ public class BootScreen extends GameLevel {
     }else
     {
       text("Oh no! Our motherboard has been damaged. Our system can no longer compute any data.",50,150);
-      text("To repair this we need your help. Using binary code you need to enter server IP address.",50,170);
+      text("To repair this we need your help. Using binary code you need to fix the problems.",50,170);
       text("Binary code is a system where a number is expressed in the base-2 numeral system.",50,190);
       text("It uses only zeros and ones to represent any number in the world.",50,210);
-      text("You need to hurry up because every 2 minutes the system will reset your progress.",50,230);
-      text("Press ENTER when you will be ready to start first task.",50,250); 
+      text("Press ENTER when you will be ready to start first task.",50,230); 
       imageMode(CENTER);
       scull = loadImage("scull.png");
       scull.resize(400,400);
