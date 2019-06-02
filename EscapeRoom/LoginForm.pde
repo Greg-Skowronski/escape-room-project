@@ -48,10 +48,10 @@ public class LoginForm extends GameLevel{
       
       
      // USERNAME TEXTBOX
-     TEXTBOX userTB = new TEXTBOX(width/2 , height/2-100);
+     TEXTBOX userTB = new TEXTBOX(width/2 , height/2-100, TEXTBOX.username);
      
      // PASSWORD TEXTBOX
-     TEXTBOX passTB = new TEXTBOX(width/2, height/2 + 20);
+     TEXTBOX passTB = new TEXTBOX(width/2, height/2 + 20, TEXTBOX.password);
      
      textboxes.add(userTB);
      textboxes.add(passTB);
@@ -69,8 +69,11 @@ public class LoginForm extends GameLevel{
        fill(255, 255, 255);
        textSize(60);
        textFont(theFont);
-       //text("LOGIN FORM", (width - textWidth("LOGIN FORM")) / 2, 60);
-       text("LOGIN FORM" , width/2 , 60);
+       
+       
+       textAlign(TOP, CENTER);
+       text("LOGIN FORM", (width - textWidth("LOGIN FORM")) / 2, 60);
+       //text("LOGIN FORM" , width/2 , 60);
        
        
        text("Username: ", width/4, height/2 - 70);
@@ -81,17 +84,10 @@ public class LoginForm extends GameLevel{
           t.DRAW();
        }
        
-       // JUST FOR DEMO (DO NOT EVER DO THAT!)
-       if (logged) {
-          fill(250, 250, 250);
-          //text("YOU ARE LOGGED IN!", (width - textWidth("YOU ARE LOGGED IN")) / 2, 230);
-          text("YOU ARE LOGGED IN!", width/2, 230);
-       }
-       
        fill(255,255,255);
        textSize(45);
-       //text("Press Enter to Login", (width - textWidth("Press Enter to Login")) / 2, 120);
-       text("Press Enter to Login", width/ 2, 120);
+       text("Press Enter to Login", (width - textWidth("Press Enter to Login")) / 2, 120);
+       //text("Press Enter to Login", width/ 2, 120);
     }
     
     // JUST FOR DEMO
