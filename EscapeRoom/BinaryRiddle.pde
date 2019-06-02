@@ -75,7 +75,8 @@ public class BinaryRiddle extends GameLevel {
     fontForState = createFont("Courier New",160,true);
     fontForValue = createFont("Courier New",40,true);
     textFont(fontMain);
-    fill(0,170,80);
+    //fill(0,170,80);
+    fill(0,200,250);
     textAlign(RIGHT);
     text(timeRemain,width-50,100);
     textAlign(CENTER);
