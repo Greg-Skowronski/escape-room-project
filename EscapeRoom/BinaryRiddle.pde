@@ -17,6 +17,9 @@ public class BinaryRiddle extends GameLevel {
   boolean end = false;
   public void loadLevel()
   {
+    fontMain = createFont("Courier New",16,true);
+    fontForState = createFont("Courier New",160,true);
+    fontForValue = createFont("Courier New",40,true);
   }
   public void unloadLevel()
   {
@@ -71,11 +74,8 @@ public class BinaryRiddle extends GameLevel {
   
   void display() {
     background(0);
-    fontMain = createFont("Courier New",16,true);
-    fontForState = createFont("Courier New",160,true);
-    fontForValue = createFont("Courier New",40,true);
+    
     textFont(fontMain);
-    //fill(0,170,80);
     fill(0,200,250);
     textAlign(RIGHT);
     text(timeRemain,width-50,100);
@@ -83,7 +83,6 @@ public class BinaryRiddle extends GameLevel {
     text("<c> 2019 SciRun Corporation.",width/2,100);
     textAlign(LEFT);
     text(day()+"-"+month()+"-"+year(),50,100); 
-    
     if(end==false)
       {
         fill(0,200,250);
