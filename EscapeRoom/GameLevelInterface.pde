@@ -23,7 +23,7 @@ enum EventSource {
 }
 enum EventType {
   LEVEL_COMPLETE,
-  
+  SERIAL_INPUT,
 }
 public class GameEvent {
   public GameEvent(EventSource source, EventType type, Object args)

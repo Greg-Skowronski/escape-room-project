@@ -58,9 +58,15 @@ public class LevelController implements EventListener {
   }
   public void onEvent(GameEvent event)
   {
-    if(event.eventType == EventType.LEVEL_COMPLETE)
+    switch(event.eventType)
     {
-      loadNextLevel();
+      case LEVEL_COMPLETE:
+        loadNextLevel();
+      break;
+      case SERIAL_INPUT:
+        currentLevel.onEvent(event);
+      break;
     }
+    
   }
 }
