@@ -15,10 +15,20 @@ public class FixedStack
     {
         if (top >= size)
             return;
-            
+        
         stack[++top] = obj;
     }
-
+    
+    public int getTopBlockValue(){
+        
+      if(top < 1){
+        return Block.MAX_VALUE;
+      }
+      
+        println(stack[top].getValue());
+        return stack[top].getValue();
+    }
+    
     public Block pop()
     {
         if (top < 0) return null;

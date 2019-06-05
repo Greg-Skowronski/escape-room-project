@@ -1,6 +1,7 @@
 public class Block{
 
     private int blockWidth;
+    public final static int MAX_VALUE = 100;
     public static final int blockHeight = 70;
     private int value;
     private color blockColor;
@@ -30,6 +31,12 @@ public class Block{
     public void setValue(int v){
       value = v;
     }
+    
+    
+    public int getValue(){
+      return value;
+    }
+    
     
     public void setColor(color c){
       blockColor = c;
