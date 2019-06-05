@@ -21,12 +21,11 @@ public class FixedStack
     
     public int getTopBlockValue(){
         
-      if(top < 1){
+      if(top < 0){
         return Block.MAX_VALUE;
       }
       
-        println(stack[top].getValue());
-        return stack[top].getValue();
+      return stack[top].getValue();
     }
     
     public Block pop()

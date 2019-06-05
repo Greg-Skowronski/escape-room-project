@@ -29,7 +29,7 @@ public class HanoiTower extends GameLevel{
   private Block tmpBlock; // will be used to animate blocks
   DIRECTION currentDirection = DIRECTION.FROM;
   private int takenFrom;
-  
+  private boolean animationTime = false;
   
   public HanoiTower(EventListener levelController) 
   { 
@@ -74,30 +74,45 @@ public class HanoiTower extends GameLevel{
   public void onKeyPress(int keycode)
   {
     //if(keycode==ENTER) raiseEvent(new GameEvent(EventSource.PC,EventType.LEVEL_COMPLETE,null));
+    if(animationTime){
+      return;
+    }
+    
     
     if(currentDirection == DIRECTION.FROM){
     
       if(keycode >= '1' && keycode <= '3'){
         tmpBlock = stack[(keycode -'1')].pop();
+        if(tmpBlock == null){
+          return;
+        }
         currentDirection = DIRECTION.TO;
+        animationTime = true;
         takenFrom = (keycode -'1');
       }
     }
     else if(currentDirection == DIRECTION.TO){
     
+      if(tmpBlock == null){
+        println("Null object");
+        return;
+      }
+      
       if(keycode >= '1' && keycode <= '3'){
         
-        if(tmpBlock.getValue() > stack[(keycode-'1')].getTopBlockValue()){
-          stack[takenFrom].push(tmpBlock);
-          return;
-        }
+        currentDirection = DIRECTION.FROM;
         
+         if(tmpBlock.getValue() > stack[(keycode-'1')].getTopBlockValue()){
+            stack[takenFrom].push(tmpBlock);
+            tmpBlock = null;
+            return;
+         }
         
         int tmp = stack[(keycode-'1')].elements();
         tmpBlock.setCoordinates(allowedXCoordinates[(keycode-'1')],  allowedYCoordinates[tmp]);
-        
         stack[(keycode -'1')].push(tmpBlock);
-        currentDirection = DIRECTION.FROM;
+        
+        tmpBlock = null;
       }
     }
     
@@ -145,6 +160,21 @@ public class HanoiTower extends GameLevel{
     text("2",  allowedXCoordinates[1] + MAX_BLOCK_WIDTH/2 - barWidth/2, 99*height/100 );
     text("3",  allowedXCoordinates[2] + MAX_BLOCK_WIDTH/2 - barWidth/2, 99*height/100 );
   }
+  
+  
+  private class BlockTransition{
+  
+    private Block bl;
+    
+    public BlockTransition(Block tmp){
+      bl = tmp;
+    }
+    
+    public void update(){
+    
+    }
+  }
+  
 }
 
 
