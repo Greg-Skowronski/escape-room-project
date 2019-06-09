@@ -1,0 +1,10 @@
+Well Done! You went so far!
+This task is a little bit different as it concerns my memory.
+Someone manipulated with it and now my data are not in place.
+Your task is to move the data from the 1st stack to the 3rd one. 
+But there is a catch!
+1. You can move just one disk at the time.
+2. No disk can be placed on top of the smaller disk.
+Good Luck!
+
+Press Space to start

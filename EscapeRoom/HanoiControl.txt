@@ -1,0 +1,6 @@
+I would almost forget! 
+1. Every stack has a number, written below it.
+2. You can manipulate disks using keys from 1 to 3.
+3. Currently active disk is marked in green.
+
+Press Space to start

@@ -35,9 +35,18 @@ public class HanoiTower extends GameLevel{
   
   private String greetingMessage = "";
   private String[] tmp;
+  private boolean greetingMessageFinished = false;
   private String controlMessage = "";
   private boolean displayMessage = true;
+  private boolean displayGreetingMessage = true;
+  private boolean displayControlMessage = false;
+  private boolean controlMessageFinished = false;
   private int messageCounter = 0;
+  private int timerCounter = 0;
+  private boolean gameFinished = false;
+  private long elapsedTime;
+  private long start;
+  private long stop;
   
   public HanoiTower(EventListener levelController) 
   { 
@@ -58,8 +67,6 @@ public class HanoiTower extends GameLevel{
     for(int i = 0; i < tmp.length;i++){
       greetingMessage += (tmp[i] + '\n');
     }
-    
-    print(greetingMessage);
     
     tmp = loadStrings("HanoiControl.txt");
     for(int i = 0; i < tmp.length;i++){
@@ -100,11 +107,32 @@ public class HanoiTower extends GameLevel{
   public void onKeyPress(int keycode)
   {
     //if(keycode==ENTER) raiseEvent(new GameEvent(EventSource.PC,EventType.LEVEL_COMPLETE,null));
+    if(displayGreetingMessage && greetingMessageFinished &&keycode == ' '){
+      displayGreetingMessage = false;
+      displayControlMessage = true;
+      messageCounter = 0;
+      start = System.currentTimeMillis();
+    }
+    
+    if(controlMessageFinished && displayControlMessage && keycode == ' '){
+    
+      displayControlMessage = false;
+      displayMessage = false;
+    }
+    
     
     if(displayMessage){
       return;
     }
     
+    if(gameFinished && keycode == ' '){
+      raiseEvent(new GameEvent(EventSource.PC,EventType.LEVEL_COMPLETE,null));
+    }
+    
+    
+    if(gameFinished){
+      return;
+    }
     
     if(currentDirection == DIRECTION.FROM){
     
@@ -152,6 +180,8 @@ public class HanoiTower extends GameLevel{
 
   public void display(){
  
+    
+    
       fill(0,0,0);
       background(0);
       drawBase();
@@ -169,6 +199,10 @@ public class HanoiTower extends GameLevel{
       if(displayMessage){
         drawMessage();
       }
+      
+      if(isGameWon()){
+        displayGameFinished();
+      }
   }
   
   private void drawMessage(){
@@ -176,9 +210,34 @@ public class HanoiTower extends GameLevel{
     textSize(20);
     textAlign(CENTER);
     
-    text(greetingMessage.charAt(messageCounter), width/2, (messageCounter+1)*30.0);
-
-    messageCounter++;
+    if(displayGreetingMessage){
+         if(messageCounter < greetingMessage.length()){
+        text(greetingMessage.substring(0, messageCounter), width/2, 30.0);
+        messageCounter++;
+      }else{
+        text(greetingMessage, width/2, 30.0);
+        greetingMessageFinished = true;
+      } 
+    }
+    else if(displayControlMessage){
+    
+        stop = System.currentTimeMillis();
+       elapsedTime = (stop - start);
+       if(elapsedTime > 1500){
+         
+        if(messageCounter < controlMessage.length()){
+          text(controlMessage.substring(0, messageCounter), width/2, 30.0);
+          messageCounter++;
+          
+        }else{
+          text(controlMessage, width/2, 30.0);
+          controlMessageFinished = true;
+        } 
+         
+       }
+    }
+   
+    
     
   }
   
@@ -205,8 +264,27 @@ public class HanoiTower extends GameLevel{
     fill(0);
     textSize(25);
     text("1",  allowedXCoordinates[0] + MAX_BLOCK_WIDTH/2 - barWidth/2, 99*height/100 );
-    text("2",  allowedXCoordinates[1] + MAX_BLOCK_WIDTH/2 - barWidth/2, 99*height/100 );
-    text("3",  allowedXCoordinates[2] + MAX_BLOCK_WIDTH/2 - barWidth/2, 99*height/100 );
+    text("2",  allowedXCoordinates[1] + MAX_BLOCK_WIDTH/2 - barWidth/2 + 10, 99*height/100 );
+    text("3",  allowedXCoordinates[2] + MAX_BLOCK_WIDTH/2 - barWidth/2 + 10, 99*height/100 );
+  }
+  
+  
+  private boolean isGameWon(){
+  
+    if(stack[2].allInRightOrder()){
+      gameFinished = true;
+      return true;
+    }
+    
+    return false;
+  }
+  
+  private void displayGameFinished(){
+  
+    fill(255,255,255);
+    textSize(30);
+    text("You did it! Well Done!\nPress Space to continue", width/2, 200);
+    
   }
   
 }

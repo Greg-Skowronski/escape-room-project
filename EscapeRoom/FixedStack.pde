@@ -63,4 +63,14 @@ public class FixedStack
           
       }
     }
+    
+    
+    public boolean allInRightOrder(){
+      
+      if(elements() == size){
+        return true;
+      }
+      
+      return false;
+    }
 }
