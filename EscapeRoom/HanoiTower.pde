@@ -30,11 +30,14 @@ public class HanoiTower extends GameLevel{
   DIRECTION currentDirection = DIRECTION.FROM;
   private int takenFrom;
   private boolean animationTime = false;
+  private final int FPS = 60;
+  private BlockTransition animationBlock;
+  
   
   public HanoiTower(EventListener levelController) 
   { 
     super(levelController);
-    frameRate(60);
+    frameRate(FPS);
     Debugger.debug("Hanoi created.");
     
     stack = new FixedStack[nrStacks];
@@ -66,6 +69,13 @@ public class HanoiTower extends GameLevel{
   public void updateLevel()
   {
     display();
+    if(animationBlock != null && animationTime){
+      animationBlock.animationCounter++;
+      if(animationBlock.animationCounter > animationBlock.animationLength*FPS){
+        animationTime = false;
+        animationBlock.animationCounter = 0;
+      }
+    }
   }
   public void onEvent(GameEvent event)
   {
@@ -86,15 +96,20 @@ public class HanoiTower extends GameLevel{
         if(tmpBlock == null){
           return;
         }
+        
         currentDirection = DIRECTION.TO;
-        animationTime = true;
         takenFrom = (keycode -'1');
+        animationTime = true;
+        animationBlock = new BlockTransition(tmpBlock);
       }
     }
     else if(currentDirection == DIRECTION.TO){
     
       if(tmpBlock == null){
-        println("Null object");
+        return;
+      }
+      
+      if(animationTime){
         return;
       }
       
@@ -131,6 +146,10 @@ public class HanoiTower extends GameLevel{
       for(FixedStack st: stack){
         st.display();
       }
+      
+      if(animationTime){
+        animationBlock.update();
+      }
   }
   
   
@@ -165,13 +184,21 @@ public class HanoiTower extends GameLevel{
   private class BlockTransition{
   
     private Block bl;
+    private int animationCounter = 0;
+    private final int animationLength = 3;
+    private final int ySpeed = -5;
     
     public BlockTransition(Block tmp){
       bl = tmp;
     }
     
     public void update(){
-    
+      
+      if(bl.y >= height/2){
+        bl.y += ySpeed;  
+      }
+      
+      bl.display();
     }
   }
   
