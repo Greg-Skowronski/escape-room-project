@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 
 public class HanoiTower extends GameLevel{
 
@@ -29,20 +30,41 @@ public class HanoiTower extends GameLevel{
   private Block tmpBlock; // will be used to animate blocks
   DIRECTION currentDirection = DIRECTION.FROM;
   private int takenFrom;
-  private boolean animationTime = false;
   private final int FPS = 60;
-  private BlockTransition animationBlock;
   
+  
+  private String greetingMessage = "";
+  private String[] tmp;
+  private String controlMessage = "";
+  private boolean displayMessage = true;
+  private int messageCounter = 0;
   
   public HanoiTower(EventListener levelController) 
   { 
     super(levelController);
+    readFile();
+    
     frameRate(FPS);
     Debugger.debug("Hanoi created.");
     
     stack = new FixedStack[nrStacks];
     
     initStacks();
+  }
+  
+  private void readFile(){
+    
+    tmp = loadStrings("HanoiInstruction.txt");
+    for(int i = 0; i < tmp.length;i++){
+      greetingMessage += (tmp[i] + '\n');
+    }
+    
+    print(greetingMessage);
+    
+    tmp = loadStrings("HanoiControl.txt");
+    for(int i = 0; i < tmp.length;i++){
+      controlMessage += (tmp[i] + '\n');
+    }
   }
   
   private void initStacks(){
@@ -79,6 +101,11 @@ public class HanoiTower extends GameLevel{
   {
     //if(keycode==ENTER) raiseEvent(new GameEvent(EventSource.PC,EventType.LEVEL_COMPLETE,null));
     
+    if(displayMessage){
+      return;
+    }
+    
+    
     if(currentDirection == DIRECTION.FROM){
     
       if(keycode >= '1' && keycode <= '3'){
@@ -87,6 +114,7 @@ public class HanoiTower extends GameLevel{
           return;
         }
         
+        tmpBlock.setActive(true);
         currentDirection = DIRECTION.TO;
         takenFrom = (keycode -'1');
        
@@ -101,6 +129,7 @@ public class HanoiTower extends GameLevel{
       if(keycode >= '1' && keycode <= '3'){
         
         currentDirection = DIRECTION.FROM;
+        tmpBlock.setActive(false);
         
          if(tmpBlock.getValue() > stack[(keycode-'1')].getTopBlockValue()){
             stack[takenFrom].push(tmpBlock);
@@ -111,6 +140,7 @@ public class HanoiTower extends GameLevel{
         int tmp = stack[(keycode-'1')].elements();
         tmpBlock.setCoordinates(allowedXCoordinates[(keycode-'1')],  allowedYCoordinates[tmp]);
         stack[(keycode -'1')].push(tmpBlock);
+        
         
         tmpBlock = null;
       }
@@ -132,8 +162,25 @@ public class HanoiTower extends GameLevel{
         st.display();
       }
       
+      if(tmpBlock != null){
+        tmpBlock.display();
+      }
+      
+      if(displayMessage){
+        drawMessage();
+      }
   }
   
+  private void drawMessage(){
+  
+    textSize(20);
+    textAlign(CENTER);
+    
+    text(greetingMessage.charAt(messageCounter), width/2, (messageCounter+1)*30.0);
+
+    messageCounter++;
+    
+  }
   
   private void drawBase(){
   
@@ -160,28 +207,6 @@ public class HanoiTower extends GameLevel{
     text("1",  allowedXCoordinates[0] + MAX_BLOCK_WIDTH/2 - barWidth/2, 99*height/100 );
     text("2",  allowedXCoordinates[1] + MAX_BLOCK_WIDTH/2 - barWidth/2, 99*height/100 );
     text("3",  allowedXCoordinates[2] + MAX_BLOCK_WIDTH/2 - barWidth/2, 99*height/100 );
-  }
-  
-  
-  private class BlockTransition{
-  
-    private Block bl;
-    private int animationCounter = 0;
-    private final int animationLength = 3;
-    private final int ySpeed = -20;
-    
-    public BlockTransition(Block tmp){
-      bl = tmp;
-    }
-    
-    public void update(){
-      
-      if(bl.y >= height/2){
-        bl.y += ySpeed;  
-      }
-      
-      bl.display();
-    }
   }
   
 }

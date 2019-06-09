@@ -11,6 +11,7 @@ public class Block{
     private int xOffset;
     private final int basicOffset = 15;
     
+    private boolean currentlyActive = false;
     
     public Block(int x, int y, int value, int blockWidth, int index){
     
@@ -52,8 +53,20 @@ public class Block{
         stroke(255,255,255);
         rect(x + xOffset,y, blockWidth - 2*xOffset, blockHeight, radius);
         
+        if(currentlyActive){
+          fill(0,255,0);
+          rect(x + xOffset,y, blockWidth - 2*xOffset, blockHeight, radius);
+        }
+        
+        
+        fill(255,255,255);
+        textSize(20);
+        text(value, x + blockWidth/2 - 5,y + blockHeight/2);
     }
     
+    public void setActive(boolean active){
+      currentlyActive = active;
+    }
     
     public void updateCoordinates(){
     
