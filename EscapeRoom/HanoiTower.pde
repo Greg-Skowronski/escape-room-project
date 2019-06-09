@@ -69,13 +69,7 @@ public class HanoiTower extends GameLevel{
   public void updateLevel()
   {
     display();
-    if(animationBlock != null && animationTime){
-      animationBlock.animationCounter++;
-      if(animationBlock.animationCounter > animationBlock.animationLength*FPS){
-        animationTime = false;
-        animationBlock.animationCounter = 0;
-      }
-    }
+    
   }
   public void onEvent(GameEvent event)
   {
@@ -84,10 +78,6 @@ public class HanoiTower extends GameLevel{
   public void onKeyPress(int keycode)
   {
     //if(keycode==ENTER) raiseEvent(new GameEvent(EventSource.PC,EventType.LEVEL_COMPLETE,null));
-    if(animationTime){
-      return;
-    }
-    
     
     if(currentDirection == DIRECTION.FROM){
     
@@ -99,17 +89,12 @@ public class HanoiTower extends GameLevel{
         
         currentDirection = DIRECTION.TO;
         takenFrom = (keycode -'1');
-        animationTime = true;
-        animationBlock = new BlockTransition(tmpBlock);
+       
       }
     }
     else if(currentDirection == DIRECTION.TO){
     
       if(tmpBlock == null){
-        return;
-      }
-      
-      if(animationTime){
         return;
       }
       
@@ -147,9 +132,6 @@ public class HanoiTower extends GameLevel{
         st.display();
       }
       
-      if(animationTime){
-        animationBlock.update();
-      }
   }
   
   
@@ -186,7 +168,7 @@ public class HanoiTower extends GameLevel{
     private Block bl;
     private int animationCounter = 0;
     private final int animationLength = 3;
-    private final int ySpeed = -5;
+    private final int ySpeed = -20;
     
     public BlockTransition(Block tmp){
       bl = tmp;
