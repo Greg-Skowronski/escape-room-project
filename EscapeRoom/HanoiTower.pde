@@ -54,6 +54,7 @@ public class HanoiTower extends GameLevel{
     readFile();
     
     frameRate(FPS);
+    rectMode(CORNER);
     Debugger.debug("Hanoi created.");
     
     stack = new FixedStack[nrStacks];
@@ -207,7 +208,7 @@ public class HanoiTower extends GameLevel{
   
   private void drawMessage(){
   
-    textSize(20);
+    textSize(25);
     textAlign(CENTER);
     
     if(displayGreetingMessage){
