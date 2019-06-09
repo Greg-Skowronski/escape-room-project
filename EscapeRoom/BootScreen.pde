@@ -11,7 +11,8 @@ public class BootScreen extends GameLevel {
   DrawDecorations Decor = new DrawDecorations();
   public void loadLevel()
   {
-    
+    font = createFont("Courier New",16,true);
+    scull = loadImage("scull.png");
   }
   public void unloadLevel()
   {
@@ -32,8 +33,6 @@ public class BootScreen extends GameLevel {
   }
   public void onMouseClick(){}
   void display() {
-    
-    font = createFont("Courier New",16,true);
     textFont(font);
     background(0);
     fill(0,170,80);
@@ -43,7 +42,6 @@ public class BootScreen extends GameLevel {
     text("<c> 2019 SciRun Corporation.",width/2,100);
     textAlign(LEFT);
     text(day()+"-"+month()+"-"+year(),50,100);
-    
     textAlign(LEFT);
     if(runningAppTime<540)
     {
@@ -94,7 +92,6 @@ public class BootScreen extends GameLevel {
       text("It uses only zeros and ones to represent any number in the world.",50,210);
       text("Press ENTER when you will be ready to start first task.",50,230); 
       imageMode(CENTER);
-      scull = loadImage("scull.png");
       scull.resize(400,400);
       image(scull, width/2+400, height/2-150);
       Decor.display();
