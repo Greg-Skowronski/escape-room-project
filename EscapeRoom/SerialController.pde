@@ -3,6 +3,7 @@ import java.util.concurrent.*;
 public class SerialController {
   public static final String DEFAULT_PORTNAME = "COM19";
   public static final int DEFAULT_BAUDRATE = 9600;
+  public static final int BUFFER_SIZE = 32;
   Serial serial;
   ConcurrentLinkedQueue<SerialMessage> incomingQueue;
   public SerialController(PApplet app, ConcurrentLinkedQueue<SerialMessage> incomingQueue, String portName, int baudrate)
@@ -21,52 +22,49 @@ public class SerialController {
   {
     return incomingQueue.poll();
   }
-  
   public void readContinous()
   {
+    while(serial.available()>0 && serial.readChar() != MESSAGE_POSTAMBLE);
     while(true)
     {
-      int messageType = 0;
-      String preambleBuffer = "";
-      String argumentBuffer = "";
-      boolean recievingMessage = false;
+      String buffer = "";
+      
       while(serial.available()>0)
       {
-        if(!recievingMessage)
+        Debugger.debug("BUFFER:"+buffer);
+        char readChar = serial.readChar();
+        print(readChar);
+        buffer += readChar;
+        if(readChar == MESSAGE_POSTAMBLE && buffer.length() > MESSAGE_PREAMBLE.length())
         {
-          if(preambleBuffer == MESSAGE_PREAMBLE)
-          {
-            recievingMessage = false;
-            messageType = serial.read();
-          }
-          else if (preambleBuffer.length()>=3)
-            preambleBuffer = "";
-          else
-            preambleBuffer += serial.readChar();
+          Debugger.debug("MESSAGE BUILT");
+          SerialMessage m = formMessageFromBuffer(buffer);
+          if(m!=null)
+            incomingQueue.add(m);
+          buffer = "";
         }
-        else
-        {
-          char readChar = serial.readChar();
-          if(readChar == MESSAGE_ENDING_CHAR)
-          {
-            incomingQueue.add(formMessageFromBuffer(messageType, argumentBuffer));
-            argumentBuffer = "";
-            preambleBuffer = "";
-            recievingMessage = false;
-          }
-          else
-            argumentBuffer += readChar;
-        }
+        else if(buffer.length() >= BUFFER_SIZE)
+          buffer = "";
       }
     }
   }
-  private SerialMessage formMessageFromBuffer(int type, String buffer)
+  private SerialMessage formMessageFromBuffer(String origBuffer)
   {
+    String buffer = origBuffer;
+    int startPoint = buffer.indexOf(MESSAGE_PREAMBLE);
+    if(startPoint<0)
+      return null;
+    buffer = buffer.substring(startPoint,buffer.length());
+    int endPoint = buffer.indexOf(MESSAGE_POSTAMBLE);
+    if(endPoint<0)
+      return null;
+    buffer = buffer.substring(0,endPoint);
+    int type = buffer.charAt(MESSAGE_PREAMBLE.length()) - 0x30; // shift from ascii to decimal for digits
     Object args = null;
     switch(SerialInputMessageTypeValues[type])
     {
       case ANALOG_READ:
-        args = Integer.parseInt(buffer);
+        args = Integer.parseInt(buffer.substring(MESSAGE_PREAMBLE.length() + 1,buffer.length()-1));
       break;
       default:
       case NO_MESSAGE:
@@ -82,7 +80,7 @@ public enum SerialInputMessageType
   NO_MESSAGE,
   ANALOG_READ, 
 }
-public static final char MESSAGE_ENDING_CHAR = '\n';
+public static final char MESSAGE_POSTAMBLE = '\n';
 public static final String MESSAGE_PREAMBLE = "msg";
 public class SerialMessage 
 {

@@ -20,6 +20,7 @@ void setup() {
   scull = loadImage("scull.png");
   levelsController = new LevelController(this);
   levelsController.loadLevel(3);
+  thread("beginAsyncSerialRead");
 }
 
 void draw() {
@@ -32,4 +33,8 @@ void draw() {
 void keyPressed() {
   levelsController.onKeyPress(keyCode);
   
+}
+public void beginAsyncSerialRead()
+{
+  serial.readContinous();
 }
