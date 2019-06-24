@@ -3,7 +3,7 @@ import java.util.concurrent.*;
 import java.util.HashMap;
 import java.util.*;
 public class SerialController {
-  public static final String DEFAULT_PORTNAME = "COM19";
+  public static final String DEFAULT_PORTNAME = "COM14";
   public static final int DEFAULT_BAUDRATE = 9600;
   public static final int BUFFER_SIZE = 32;
   Serial serial;
@@ -28,6 +28,7 @@ public class SerialController {
   public void readContinous()
   {
     while(true)
+    {
       if(serial.available()>0)
       {
           char readChar = serial.readChar();
@@ -43,6 +44,7 @@ public class SerialController {
             }
           }
       }
+    }
   }
 }
 

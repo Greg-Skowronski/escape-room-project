@@ -31,9 +31,10 @@ public class TextRenderer {
     int B = (int)( (RGBColor & 0x0000ff) >> 0  );
     int[] rectDimensions = getTextRectangleDimensions(text);
     fill(0);
+    textSize(textSize);
     rect(x,y-rectDimensions[1]*textSize+textDescent(),textWidth(text),textDescent()+textAscent());
     fill(R,G,B);
-    textSize(textSize);
+    
     text(text,x,y);
   }
   private int[] getTextRectangleDimensions(String str)
