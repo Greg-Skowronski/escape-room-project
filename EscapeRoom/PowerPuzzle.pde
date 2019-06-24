@@ -1,16 +1,46 @@
 public class PowerPuzzle extends GameLevel {
+  final int sampleCount = 64;
+  final float threshold = 0.8f;
+  final int period = 1000;
+  final float magnitude = 5.0f;
   final char[] loadingSigns = {'/', '-', '\\', '|' };
   final String[] ipAdresses = {"11:420:69", "88:911:42", "88:911:42", "88:911:42"};
   int time = 0;
   ScopePlotter plotter;
+  int signalState = 4;
+  FunctionGenerator[] generators = new FunctionGenerator[] {
+    new NoiseGenerator(period,0.05f), 
+    new NoiseGenerator(period,0.05f), 
+    new SineGenerator(period),
+    new HalfRectSineGenerator(period,0.02f), 
+    new StableHalfRectSineGenerator (period,0.02f,0.0001f),
+    new FullRectSineGenerator(period,0.04f),
+    new StableFullRectSineGenerator (period,0.04f,1.01f), 
+  };
   public PowerPuzzle(EventListener levelController) 
   { 
     super(levelController);
   }  
   public void updateLevel()
   {
+    boolean areAllSamplesAboveThreshold = true;
+    for(int i = 0; i < sampleCount; i++)
+    {
+      if(plotter.buffer.elements[i]<threshold)
+      {
+        areAllSamplesAboveThreshold = false;
+        break;
+      }
+    }
+    if(areAllSamplesAboveThreshold)
+    {
+      //raiseEvent(new GameEvent(EventSource.PC,EventType.LEVEL_COMPLETE,null));
+    }
     time++;
-    plotter.drawPlot(0xffffff,2);
+    float pnt = -(float)generators[signalState].Generate((double)time/FRAMERATE*1000);
+    //print("\r"+pnt);
+    plotter.addPoint(pnt);
+    plotter.drawPlot(0xff0000,0x00ff00,2);
     if(time<60*5)
     {
       //background(0);
@@ -50,7 +80,7 @@ public class PowerPuzzle extends GameLevel {
     background(0);
     fill(0,255,0);
     textFont(f);
-    plotter = new ScopePlotter(600, 500, 100, 100, 4, 1023, 0);
+    plotter = new ScopePlotter(200, 400, 800, 200, sampleCount, magnitude, threshold);
 
   }
   public void onKeyPress(int keycode)
@@ -65,7 +95,7 @@ public class PowerPuzzle extends GameLevel {
   {
     if(event.eventType == EventType.SERIAL_INPUT)
     {
-      plotter.addPoint((int)((SerialMessage)event.args).args);
+      signalState = ((SerialMessage)event.args).messageType;
     }
   }
 }
